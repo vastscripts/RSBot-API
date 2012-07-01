@@ -186,8 +186,13 @@ public class Bank {
 			} else if (isBankBooth((Identifiable) bank)) {
 				interacted = bank.interact("Bank", "Bank booth");
 			} else if (isBankChest((Identifiable) bank)) {
-				bank.hover();
-				interacted = Menu.contains("Open") ? bank.interact("Open") : bank.interact("Use");
+				if (Menu.contains("Open")) {
+					interacted = bank.interact("Open");
+				} else if (Menu.contains("Use")) {
+					interacted = bank.interact("Use");
+				} else {
+					interacted = bank.interact("Bank");
+				}
 			} else if (isBankCounter((Identifiable) bank)) {
 				interacted = bank.interact("Bank", "Counter");
 			}
